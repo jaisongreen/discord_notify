@@ -1,24 +1,17 @@
 const config = require('../config');
-
-function generatePresenceChangeMessage(changes) {
-  let outputChanges = [];
-  if (changes.status) {
-    outputChanges.push(`status changed to ${changes.status}`);
-  }
-  if (changes.game) {
-    outputChanges.push(`started playing ${changes.game}`);
-  }
-  if (outputChanges.length > 0) {
-    return `${changes.displayName}: ${outputChanges.join(' and ')}`;
-  }
-  return null;
-}
+const moment = require('moment');
 
 function generatePresenceChangeAction(changes) {
   const followingGames = config.watching_games || [];
+  const followingMembers = config.watching_members || [];
 
   if (changes.game) {
-    if (followingGames.length === 0 || followingGames.includes(changes.game)) {
+    const includesGame = (followingGames.length === 0 || followingGames.includes(changes.game));
+    const includesMember = (followingMembers.length === 0 || followingMembers.includes(changes.id));
+    if (includesGame) {
+      console.log(`${moment.format()}: ${changes.displayName} started playing ${changes.game}`);
+    }
+    if (includesGame && includesMember) {
       return changes;
     }
   }
@@ -27,6 +20,5 @@ function generatePresenceChangeAction(changes) {
 }
 
 module.exports = {
-  generatePresenceChangeMessage,
   generatePresenceChangeAction
 };

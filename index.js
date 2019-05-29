@@ -19,13 +19,11 @@ client.on('message', msg => {
 });
 
 client.on('presenceUpdate', (oldMember, newMember) => {
-  const { id, displayName, presence } = newMember;
+  const { user, displayName, presence } = newMember;
   const game = (presence.game) ? presence.game.name : '';
-  const changes = LocalDatabase.updateUser(id, displayName, presence.status, game);
+  const changes = LocalDatabase.updateUser(user.id, displayName, presence.status, game);
   if (changes) {
-    const message = Presence.generatePresenceChangeMessage(changes);
     const action = Presence.generatePresenceChangeAction(changes);
-    if (message) console.log(message);
     if (action) {
       pusher.note(config.pushbullet_destination, changes.displayName, changes.game, (error, response) => {
         if (error) {

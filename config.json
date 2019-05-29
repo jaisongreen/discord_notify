@@ -2,5 +2,6 @@
   "discord_token": "",
   "pushbullet_token": "",
   "pushbullet_destination": "",
-  "watching_games": []
+  "watching_games": [],
+  "watching_members": []
 }
