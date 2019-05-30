@@ -9,7 +9,7 @@ Discord Notify is a node.js application that monitors Discord and sends notifica
 Edit the `config.json` file.
 
 | Config | Type | Description |
-|--|--|
+| --- | --- | --- |
 | `discord_token` | String | The Discord token |
 | `pushbullet_token` | String | PushBullet token |
 | `pushbullet_destination` | String | The PushBullet email address or deviceId to send notifications to. *Use an email address if you want the notification to goto all of your PushBullet devices* |
