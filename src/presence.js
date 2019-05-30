@@ -9,7 +9,7 @@ function generatePresenceChangeAction(changes) {
     const includesGame = (followingGames.length === 0 || followingGames.includes(changes.game));
     const includesMember = (followingMembers.length === 0 || followingMembers.includes(changes.id));
     if (includesGame) {
-      console.log(`${moment.format()}: ${changes.displayName} started playing ${changes.game}`);
+      console.log(`${moment().format('LLL')}: ${changes.displayName} started playing ${changes.game}`);
     }
     if (includesGame && includesMember) {
       return changes;
